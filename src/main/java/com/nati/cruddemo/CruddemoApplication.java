@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.beans.BeanProperty;
+import java.util.List;
 
 @SpringBootApplication
 public class CruddemoApplication {
@@ -20,9 +21,19 @@ public class CruddemoApplication {
         return  runner ->{
 //            createStudent(studentDAO);
 //            createMultipleStudent(studentDAO);
-            readStudent(studentDAO);
+//            readStudent(studentDAO);
+
+            queryForStudent(studentDAO);
         };
   }
+
+    private void queryForStudent(StudentDAO studentDAO) {
+        List<Student> students = studentDAO.findAll();
+
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
 
     private void readStudent(StudentDAO studentDAO) {
         System.out.println("Creating New Student ..");
