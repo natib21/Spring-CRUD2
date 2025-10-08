@@ -20,12 +20,41 @@ public class CruddemoApplication {
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return  runner ->{
 //            createStudent(studentDAO);
-//            createMultipleStudent(studentDAO);
+            createMultipleStudent(studentDAO);
 //            readStudent(studentDAO);
 
-            queryForStudent(studentDAO);
+//            queryForStudent(studentDAO);
+//            updateStudent(studentDAO);
+//            deleteStudent(studentDAO);
+//            deleteAll(studentDAO);
         };
   }
+
+
+  private void deleteAll(StudentDAO studentDAO) {
+        System.out.println("Deleting all students...");
+        int numRowsDeleted = studentDAO.deleteAll();
+        System.out.println("Deleted all students. " + numRowsDeleted);
+    }
+
+
+    private void deleteStudent(StudentDAO studentDAO) {
+     int studentId = 3;
+     System.out.println("Deleting student " + studentId);
+     studentDAO.delete(studentId);
+    }
+
+
+    private void updateStudent(StudentDAO studentDAO) {
+        int studentId = 1;
+        System.out.println("Updating student with id " + studentId);
+        Student student = studentDAO.findById(studentId);
+        System.out.println("Update student"+student);
+        student.setFirstName("Nathnael");
+        studentDAO.update(student);
+        System.out.println("Updated student with id " + student);
+    }
+
 
     private void queryForStudent(StudentDAO studentDAO) {
         List<Student> students = studentDAO.findAll();
@@ -53,11 +82,11 @@ public class CruddemoApplication {
         Student student1 = new Student("Tsega","Abedella","TsegaAbdella@gmail.com");
         Student student2 = new Student("Picolo","Song","Picolozelalem@gmail.com");
         Student student3 = new Student("Mimo","Legesse","Mimozelalem@gmail.com");
-
         studentDAO.save(student1);
         studentDAO.save(student2);
         studentDAO.save(student3);
     }
+
 
     private void createStudent(StudentDAO studentDAO) {
         System.out.println("Creating New Student ..");
@@ -66,4 +95,6 @@ public class CruddemoApplication {
         studentDAO.save(student);
         System.out.println("Saved Student Generated Id:" + student.getId());
     }
+
+
 }
