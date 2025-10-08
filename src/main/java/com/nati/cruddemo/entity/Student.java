@@ -19,7 +19,6 @@ public class Student {
     @Column(name="email")
     private String email;
 
-
     public Student (){}
 
     public Student(String firstName, String last_name, String email) {
@@ -59,7 +58,6 @@ public class Student {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     @Override
     public String toString() {
